@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import {
 	CalendarIcon,
+	ClientsIcon,
 	CoffeeIcon,
 	GithubIcon,
 	GlobalTimeIcon,
@@ -9,11 +10,14 @@ import {
 	MailIcon,
 	NextJSIcon,
 	NodeJSIcon,
+	PaperPlaneIcon,
 	PinIcon,
 	ShadcnUIIcon,
 	StackIcon,
+	StarIcon,
 	TailwindCSSIcon,
 	ToolsIcon,
+	WorkClientsIcon,
 	WorkIcon,
 } from "@/icons/dev-icons";
 import { createFileRoute } from "@tanstack/react-router";
@@ -228,6 +232,51 @@ const TechStack = () => (
 	</div>
 );
 
+const NumbersGrid = () => (
+	<div className="grid grid-cols-3 grid-rows-1 gap-4">
+		<div className="flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
+			<p className="text-6xl">19+</p>
+
+			<Tag title="Projects" icon={WorkIcon} />
+		</div>
+		<div className="flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
+			<p className="text-6xl">9+</p>
+
+			<Tag title="Clients" icon={ClientsIcon} />
+		</div>
+		<div className="flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
+			<p className="text-6xl">4+</p>
+
+			<Tag title="YOE" icon={StarIcon} />
+		</div>
+	</div>
+);
+
+const Collab = () => (
+	<div className="flex flex-col gap-4 items-center justify-center p-4 border-[1px] border-white/10">
+		<div className="p-4 bg-neutral-950/75 border-[1px] border-white/10">
+			<WorkClientsIcon />
+		</div>
+
+		<div className="text-center">
+			<p>Let&apos;s work together</p>
+			<p>and make your ideas come to life.</p>
+		</div>
+
+		<div className="flex gap-2">
+			<div className="flex items-center px-4 py-2 bg-neutral-950 border-[1px] border-white/10">
+				<MailIcon />
+			</div>
+			<div className="flex items-center px-4 py-2 bg-neutral-950 border-[1px] border-white/10">
+				<PaperPlaneIcon />
+			</div>
+			<div className="flex items-center px-4 py-2 bg-neutral-950 border-[1px] border-white/10 *:size-6">
+				<GithubIcon />
+			</div>
+		</div>
+	</div>
+);
+
 function App() {
 	return (
 		<div className="min-h-screen flex flex-col gap-4 p-4 bg-neutral-900 text-white">
@@ -239,6 +288,8 @@ function App() {
 
 			<div className="flex flex-col gap-4">
 				<TechStack />
+				<NumbersGrid />
+				<Collab />
 			</div>
 
 			<div className="flex flex-col gap-4">
