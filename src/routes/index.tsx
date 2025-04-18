@@ -9,6 +9,7 @@ import {
 	GlobalTimeIcon,
 	GlobeIcon,
 	HomeIcon,
+	LinkArrow,
 	MailIcon,
 	NextJSIcon,
 	NodeJSIcon,
@@ -34,16 +35,18 @@ export const Route = createFileRoute("/")({
 });
 
 const Badge = (props: { title: string }) => (
-	<div className="w-fit px-2 py-1 bg-green-500/20 text-green-500">
+	<div className="w-fit px-2 py-1 bg-green-700/20 text-green-600">
 		<p className="text-xs font-bold">{props.title}</p>
 	</div>
 );
 
 const Tag = (props: { title: string; icon: ComponentType }) => (
-	<div className="w-fit flex items-center gap-1 px-2 py-1 bg-neutral-800">
-		<props.icon />
+	<div className="w-fit flex items-center gap-1 px-2 py-1 bg-neutral-800/50">
+		<div className="*:text-purple-300 *:size-5">
+			<props.icon />
+		</div>
 
-		<p>{props.title}</p>
+		<p className="font-semibold">{props.title}</p>
 	</div>
 );
 
@@ -53,13 +56,28 @@ const Item = (props: { title: string }) => (
 	</div>
 );
 
-const TechCard = (props: { title: string; icon: ComponentType }) => (
-	<div className="h-16 flex gap-2 p-2 items-center bg-neutral-950/30 border-[1px] border-white/5">
-		<div className="h-full bg-white/5 border-[1px] border-white/5 flex items-center justify-center aspect-square fill-purple-300/75 *:size-6">
-			<props.icon />
+const TechCard = (props: {
+	title: string;
+	link: string;
+	icon: ComponentType;
+}) => (
+	<div className="flex justify-between items-center p-2 pr-4 text-neutral-200 bg-neutral-950/30 border-[1px] border-white/5">
+		<div className="flex gap-2 items-center">
+			<div className="h-full p-2 bg-white/5 border-[1px] border-white/5 flex items-center justify-center aspect-square fill-purple-300 *:size-6">
+				<props.icon />
+			</div>
+
+			<p>{props.title}</p>
 		</div>
 
-		<p>{props.title}</p>
+		<a
+			href={props.link}
+			target="_blank"
+			rel="noreferrer"
+			className="*:text-purple-300"
+		>
+			<LinkArrow />
+		</a>
 	</div>
 );
 
@@ -72,6 +90,16 @@ const StarRating = (props: { rating: number }) => (
 			// Soon replace this with an empty rating star
 			<div className="size-6" key={crypto.randomUUID()} />
 		))}
+	</div>
+);
+
+const SectionHeader = (props: { title: string; icon: ComponentType }) => (
+	<div className="flex gap-2 items-center">
+		<div className="text-purple-300">
+			<props.icon />
+		</div>
+
+		<p className="text-2xl font-bold text-neutral-200">{props.title}</p>
 	</div>
 );
 
@@ -129,8 +157,13 @@ const MainInfo = () => (
 			<div>
 				<Badge title="Available to Work" />
 
-				<p>Mihai</p>
-				<p>I'm a full-stack developer</p>
+				<p className="text-purple-300 text-3xl font-bold">Mihai</p>
+				<p>
+					I'm a{" "}
+					<span className="text-purple-300 font-bold">
+						full-stack developer
+					</span>
+				</p>
 			</div>
 		</div>
 
@@ -160,7 +193,7 @@ const MainInfo = () => (
 			))}
 		</div>
 
-		<div className="flex gap-4 *:grow *:flex *:gap-1 *:items-center *:justify-center">
+		<div className="flex gap-4 font-semibold *:grow *:flex *:gap-2 *:items-center *:justify-center">
 			<a
 				href="mailto:"
 				target="_blank"
@@ -190,11 +223,7 @@ const MainInfo = () => (
 
 const Services = () => (
 	<div className="p-4 border-[1px] border-white/10">
-		<div className="flex gap-2">
-			<ToolsIcon />
-
-			<p>Services</p>
-		</div>
+		<SectionHeader title="Services" icon={ToolsIcon} />
 
 		<p>My services are tailored to your needs and budget.</p>
 
@@ -229,11 +258,7 @@ const Services = () => (
 
 const Projects = () => (
 	<div className="p-4 border-[1px] border-white/10">
-		<div className="flex gap-2">
-			<WorkIcon />
-
-			<p>Projects</p>
-		</div>
+		<SectionHeader title="Projects" icon={WorkIcon} />
 
 		<p>Here are some of my projects I have worked on.</p>
 
@@ -264,28 +289,25 @@ const Projects = () => (
 
 const TechStack = () => (
 	<div className="p-4 border-[1px] border-white/10">
-		<div className="flex gap-2">
-			<StackIcon />
-
-			<p>My tech stack</p>
-		</div>
+		<SectionHeader title="My tech stack" icon={StackIcon} />
 
 		<p>My favourite tech stack I use on my projects.</p>
 
 		<div className="w-full h-8" />
 
-		<div className="grid grid-rows-2 grid-cols-2 gap-2">
+		<div className="grid grid-rows-4 grid-cols-1 gap-2">
 			{(
 				[
-					["Next.js", NextJSIcon],
-					["TailwindCSS", TailwindCSSIcon],
-					["Shadcn/ui", ShadcnUIIcon],
-					["Node.js", NodeJSIcon],
-				] as [string, ComponentType][]
+					["Next.js", "https://nextjs.org", NextJSIcon],
+					["TailwindCSS", "https://tailwindcss.com", TailwindCSSIcon],
+					["Shadcn/ui", "https://ui.shadcn.com", ShadcnUIIcon],
+					["Node.js", "https://nodejs.org", NodeJSIcon],
+				] as [string, string, ComponentType][]
 			).map((element) => (
 				<TechCard
 					title={element[0]}
-					icon={element[1]}
+					icon={element[2]}
+					link={element[1]}
 					key={`techcard-${element[0]}-${element[1]}`}
 				/>
 			))}
@@ -294,37 +316,39 @@ const TechStack = () => (
 );
 
 const NumbersGrid = () => (
-	<div className="grid grid-cols-3 grid-rows-1 gap-4">
+	<div className="grid grid-cols-2 grid-rows-2 gap-4 text-neutral-200">
 		<div className="flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
-			<p className="text-6xl">19+</p>
+			<p className="text-4xl">19+</p>
 
 			<Tag title="Projects" icon={WorkIcon} />
 		</div>
 		<div className="flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
-			<p className="text-6xl">9+</p>
+			<p className="text-4xl">9+</p>
 
 			<Tag title="Clients" icon={ClientsIcon} />
 		</div>
-		<div className="flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
-			<p className="text-6xl">4+</p>
+		<div className="col-span-2 flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
+			<p className="text-4xl">4+</p>
 
-			<Tag title="YOE" icon={StarIcon} />
+			<Tag title="Years of Experience" icon={StarIcon} />
 		</div>
 	</div>
 );
 
 const Collab = () => (
 	<div className="flex flex-col gap-4 items-center justify-center p-4 border-[1px] border-white/10">
-		<div className="p-4 bg-neutral-950/75 border-[1px] border-white/10">
+		<div className="p-4 bg-neutral-950/30 text-purple-300 border-[1px] border-white/10">
 			<WorkClientsIcon />
 		</div>
 
 		<div className="text-center">
-			<p>Let&apos;s work together</p>
-			<p>and make your ideas come to life.</p>
+			<p className="text-2xl font-bold text-neutral-200">
+				Let&apos;s work together
+			</p>
+			<p className="font-semibold">and make your ideas come to life.</p>
 		</div>
 
-		<div className="flex gap-2 *:flex *:items-center *:px-4 *:py-2 *:bg-neutral-950 *:border-[1px] *:border-white/10">
+		<div className="flex gap-2 *:flex *:items-center *:px-4 *:py-2 *:bg-neutral-950 *:text-neutral-200 *:border-[1px] *:border-white/10">
 			<div className="hover:bg-neutral-800/25">
 				<MailIcon />
 			</div>
@@ -340,11 +364,7 @@ const Collab = () => (
 
 const WorkProcess = () => (
 	<div className="p-4 border-[1px] border-white/10">
-		<div className="flex gap-2">
-			<SpinArrowsIcon />
-
-			<p>Work process</p>
-		</div>
+		<SectionHeader title="Work process" icon={SpinArrowsIcon} />
 
 		<p>The work process explained in 4 simple steps.</p>
 
@@ -392,11 +412,7 @@ const WorkProcess = () => (
 
 export const Testimonials = () => (
 	<div className="p-4 border-[1px] border-white/10">
-		<div className="flex gap-2">
-			<StarHandIcon />
-
-			<p>Testimonials</p>
-		</div>
+		<SectionHeader title="Testimonials" icon={StarHandIcon} />
 
 		<p>What my clients say about me.</p>
 
@@ -413,7 +429,7 @@ export const Testimonials = () => (
 
 function App() {
 	return (
-		<div className="min-h-screen flex flex-col gap-4 p-4 bg-neutral-900 text-white">
+		<div className="min-h-screen flex flex-col gap-4 p-4 bg-neutral-900 text-neutral-400">
 			<div className="flex flex-col gap-4">
 				<MainInfo />
 				<Services />
