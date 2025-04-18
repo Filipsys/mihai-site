@@ -2,6 +2,8 @@ import type { ComponentType } from "react";
 import {
 	CalendarIcon,
 	ClientsIcon,
+	ClientThoughtsIcon,
+	CodeTagIcon,
 	CoffeeIcon,
 	GithubIcon,
 	GlobalTimeIcon,
@@ -12,10 +14,15 @@ import {
 	NodeJSIcon,
 	PaperPlaneIcon,
 	PinIcon,
+	RatingStarIcon,
+	RocketIcon,
 	ShadcnUIIcon,
+	SpinArrowsIcon,
 	StackIcon,
+	StarHandIcon,
 	StarIcon,
 	TailwindCSSIcon,
+	TestingFlaskIcon,
 	ToolsIcon,
 	WorkClientsIcon,
 	WorkIcon,
@@ -53,6 +60,60 @@ const TechCard = (props: { title: string; icon: ComponentType }) => (
 		</div>
 
 		<p>{props.title}</p>
+	</div>
+);
+
+const StarRating = (props: { rating: number }) => (
+	<div className="flex gap-0.5">
+		{[...Array(Math.floor(props.rating)).keys()].map(() => (
+			<RatingStarIcon key={crypto.randomUUID()} />
+		))}
+		{[...Array(Math.floor(5 - props.rating)).keys()].map(() => (
+			// Soon replace this with an empty rating star
+			<div className="size-6" key={crypto.randomUUID()} />
+		))}
+	</div>
+);
+
+const Testimonial = (props: {
+	name: string;
+	company: string;
+	rating: number;
+	description: string;
+}) => (
+	<div className="p-4 bg-neutral-950/30 border-[1px] border-white/5">
+		<div className="flex justify-between ">
+			<div className="mb-4">
+				<p>{props.name}</p>
+				<p>{props.company}</p>
+			</div>
+
+			{props.rating <= 5 && props.rating >= 1 ? (
+				<StarRating rating={props.rating} />
+			) : null}
+		</div>
+
+		<p>{props.description}</p>
+	</div>
+);
+
+export const ProcessCard = (props: {
+	title: string;
+	description: string;
+	index: number;
+	icon: ComponentType;
+}) => (
+	<div className="flex gap-2 p-2 border-[1px] border-white/5">
+		<props.icon />
+
+		<div className="flex w-full justify-between">
+			<div className="flex flex-col">
+				<p>{props.title}</p>
+				<p>{props.description}</p>
+			</div>
+
+			<p>#{props.index}</p>
+		</div>
 	</div>
 );
 
@@ -263,17 +324,90 @@ const Collab = () => (
 			<p>and make your ideas come to life.</p>
 		</div>
 
-		<div className="flex gap-2">
-			<div className="flex items-center px-4 py-2 bg-neutral-950 border-[1px] border-white/10">
+		<div className="flex gap-2 *:flex *:items-center *:px-4 *:py-2 *:bg-neutral-950 *:border-[1px] *:border-white/10">
+			<div className="hover:bg-neutral-800/25">
 				<MailIcon />
 			</div>
-			<div className="flex items-center px-4 py-2 bg-neutral-950 border-[1px] border-white/10">
+			<div className="hover:bg-neutral-800/25">
 				<PaperPlaneIcon />
 			</div>
-			<div className="flex items-center px-4 py-2 bg-neutral-950 border-[1px] border-white/10 *:size-6">
+			<div className="hover:bg-neutral-800/25 *:size-6">
 				<GithubIcon />
 			</div>
 		</div>
+	</div>
+);
+
+const WorkProcess = () => (
+	<div className="p-4 border-[1px] border-white/10">
+		<div className="flex gap-2">
+			<SpinArrowsIcon />
+
+			<p>Work process</p>
+		</div>
+
+		<p>The work process explained in 4 simple steps.</p>
+
+		<div className="w-full h-8" />
+
+		<div className="grid grid-rows-4 grid-cols-1 gap-2">
+			{(
+				[
+					[
+						"Project Breif",
+						"We will discuss your project and its goals.",
+						ClientThoughtsIcon,
+					],
+					[
+						"Design & Develop",
+						"I will design and develop your website according to your needs.",
+						CodeTagIcon,
+					],
+					[
+						"Testing & Review",
+						"I will let you test the website and make any changes if needed.",
+						TestingFlaskIcon,
+					],
+					[
+						"Launch",
+						"I will give you the source code and help you with the launch.",
+						RocketIcon,
+					],
+				] as [string, string, ComponentType][]
+			).map((element, index) => (
+				<ProcessCard
+					title={element[0]}
+					description={element[1]}
+					index={index + 1}
+					icon={element[2]}
+					key={`process-step-${
+						// biome-ignore lint/suspicious/noArrayIndexKey: There will never be an index that will be equal here too. It's a static array of four elements
+						index
+					}`}
+				/>
+			))}
+		</div>
+	</div>
+);
+
+export const Testimonials = () => (
+	<div className="p-4 border-[1px] border-white/10">
+		<div className="flex gap-2">
+			<StarHandIcon />
+
+			<p>Testimonials</p>
+		</div>
+
+		<p>What my clients say about me.</p>
+
+		<div className="w-full h-8" />
+
+		<Testimonial
+			name="Anom"
+			company="Delvfox"
+			rating={5}
+			description="Working with Mihai was a great experience. He is always on time and ready to help."
+		/>
 	</div>
 );
 
@@ -293,7 +427,8 @@ function App() {
 			</div>
 
 			<div className="flex flex-col gap-4">
-				<div />
+				<WorkProcess />
+				<Testimonials />
 			</div>
 		</div>
 	);
