@@ -51,7 +51,7 @@ const Tag = (props: { title: string; icon: ComponentType }) => (
 );
 
 const Item = (props: { title: string }) => (
-	<div className="w-fit text-nowrap px-3 py-2 bg-neutral-950/30 text-purple-300/75 font-bold border-[1px] border-white/5">
+	<div className="w-fit text-nowrap px-3 py-2 bg-neutral-950/25 text-purple-300/75 font-bold border-[1px] border-white/5">
 		<p>{props.title}</p>
 	</div>
 );
@@ -61,7 +61,7 @@ const TechCard = (props: {
 	link: string;
 	icon: ComponentType;
 }) => (
-	<div className="flex justify-between items-center p-2 pr-4 text-neutral-200 bg-neutral-950/30 border-[1px] border-white/5">
+	<div className="flex justify-between items-center p-2 pr-4 text-neutral-200 bg-neutral-950/25 border-[1px] border-white/5">
 		<div className="flex gap-2 items-center">
 			<div className="h-full p-2 bg-white/5 border-[1px] border-white/5 flex items-center justify-center aspect-square fill-purple-300 *:size-6">
 				<props.icon />
@@ -82,7 +82,7 @@ const TechCard = (props: {
 );
 
 const StarRating = (props: { rating: number }) => (
-	<div className="flex gap-0.5">
+	<div className="flex gap-0.5 text-purple-300">
 		{[...Array(Math.floor(props.rating)).keys()].map(() => (
 			<RatingStarIcon key={crypto.randomUUID()} />
 		))}
@@ -109,10 +109,10 @@ const Testimonial = (props: {
 	rating: number;
 	description: string;
 }) => (
-	<div className="p-4 bg-neutral-950/30 border-[1px] border-white/5">
+	<div className="p-4 bg-neutral-950/25 border-[1px] border-white/5">
 		<div className="flex justify-between ">
 			<div className="mb-4">
-				<p>{props.name}</p>
+				<p className="text-neutral-200 font-bold">{props.name}</p>
 				<p>{props.company}</p>
 			</div>
 
@@ -131,16 +131,16 @@ export const ProcessCard = (props: {
 	index: number;
 	icon: ComponentType;
 }) => (
-	<div className="flex gap-2 p-2 border-[1px] border-white/5">
+	<div className="flex gap-4 p-4 border-[1px] border-white/5 bg-neutral-950/25 *:first:text-purple-300">
 		<props.icon />
 
 		<div className="flex w-full justify-between">
 			<div className="flex flex-col">
-				<p>{props.title}</p>
+				<p className="text-neutral-200 font-bold">{props.title}</p>
 				<p>{props.description}</p>
 			</div>
 
-			<p>#{props.index}</p>
+			<p className="italic text-neutral-200/25">#{props.index}</p>
 		</div>
 	</div>
 );
@@ -167,7 +167,7 @@ const MainInfo = () => (
 			</div>
 		</div>
 
-		<div className="flex gap-2 flex-wrap p-2 bg-neutral-950/30 border-[1px] border-white/5">
+		<div className="flex gap-2 flex-wrap p-2 bg-neutral-950/25 border-[1px] border-white/5">
 			{/* Is this actually better than using
 			multiple <Tag /> elements? I thought it
 			would be better, look more compact and
@@ -337,7 +337,7 @@ const NumbersGrid = () => (
 
 const Collab = () => (
 	<div className="flex flex-col gap-4 items-center justify-center p-4 border-[1px] border-white/10">
-		<div className="p-4 bg-neutral-950/30 text-purple-300 border-[1px] border-white/10">
+		<div className="p-4 bg-neutral-950/25 text-purple-300 border-[1px] border-white/10">
 			<WorkClientsIcon />
 		</div>
 
@@ -348,7 +348,7 @@ const Collab = () => (
 			<p className="font-semibold">and make your ideas come to life.</p>
 		</div>
 
-		<div className="flex gap-2 *:flex *:items-center *:px-4 *:py-2 *:bg-neutral-950 *:text-neutral-200 *:border-[1px] *:border-white/10">
+		<div className="flex gap-2 *:flex *:items-center *:px-4 *:py-2 *:bg-neutral-950/25 *:text-neutral-200 *:border-[1px] *:border-white/10">
 			<div className="hover:bg-neutral-800/25">
 				<MailIcon />
 			</div>
@@ -418,34 +418,60 @@ export const Testimonials = () => (
 
 		<div className="w-full h-8" />
 
-		<Testimonial
-			name="Anom"
-			company="Delvfox"
-			rating={5}
-			description="Working with Mihai was a great experience. He is always on time and ready to help."
-		/>
+		<div className="relative">
+			<div className="before:absolute before:w-full before:h-full before:bg-gradient-to-t before:from-neutral-900 before:to-transparent">
+				<Testimonial
+					name="Anom"
+					company="Delvfox"
+					rating={5}
+					description="Working with Mihai was a great experience. He is always on time and ready to help."
+				/>
+			</div>
+		</div>
+	</div>
+);
+
+const Footer = () => (
+	<div className="p-4 py-8 bg-neutral-900 text-neutral-200/50 text-center text-sm">
+		<p>
+			Made with 💖 by{" "}
+			<a
+				href="https://github.com/kkmihai"
+				target="_blank"
+				rel="noreferrer"
+				className="text-purple-300 text-shadow-[0_0_15px] text-shadow-purple-300 hover:underline"
+			>
+				kkMihai
+			</a>
+		</p>
+
+		<p>&copy; 2025 All rights reserved</p>
 	</div>
 );
 
 function App() {
 	return (
-		<div className="min-h-screen flex flex-col gap-4 p-4 bg-neutral-900 text-neutral-400">
-			<div className="flex flex-col gap-4">
-				<MainInfo />
-				<Services />
-				<Projects />
+		<>
+			<div className="min-h-screen *:max-w-[900px] flex flex-col justify-center gap-4 p-4 bg-neutral-900 text-neutral-400 lg:flex-row lg:*:w-1/3">
+				<div className="flex flex-col gap-4">
+					<MainInfo />
+					<Services />
+					<NumbersGrid />
+				</div>
+
+				<div className="flex flex-col gap-4">
+					<Projects />
+					<TechStack />
+					<Collab />
+				</div>
+
+				<div className="flex flex-col gap-4">
+					<WorkProcess />
+					<Testimonials />
+				</div>
 			</div>
 
-			<div className="flex flex-col gap-4">
-				<TechStack />
-				<NumbersGrid />
-				<Collab />
-			</div>
-
-			<div className="flex flex-col gap-4">
-				<WorkProcess />
-				<Testimonials />
-			</div>
-		</div>
+			<Footer />
+		</>
 	);
 }
