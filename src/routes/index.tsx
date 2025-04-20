@@ -88,7 +88,7 @@ const StarRating = (props: { rating: number }) => (
 		))}
 		{[...Array(Math.floor(5 - props.rating)).keys()].map(() => (
 			// Soon replace this with an empty rating star
-			<div className="size-6" key={crypto.randomUUID()} />
+			<div className="size-6 text-neutral-800" key={crypto.randomUUID()} />
 		))}
 	</div>
 );
@@ -131,7 +131,7 @@ export const ProcessCard = (props: {
 	index: number;
 	icon: ComponentType;
 }) => (
-	<div className="flex gap-4 p-4 border-[1px] border-white/5 bg-neutral-950/25 *:first:text-purple-300">
+	<div className="flex  gap-4 p-4 border-[1px] border-white/5 bg-neutral-950/25 *:first:text-purple-300">
 		<props.icon />
 
 		<div className="flex w-full justify-between">
@@ -316,7 +316,7 @@ const TechStack = () => (
 );
 
 const NumbersGrid = () => (
-	<div className="grid grid-cols-2 grid-rows-2 gap-4 text-neutral-200">
+	<div className="h-full grid grid-cols-2 grid-rows-2 gap-4 text-neutral-200">
 		<div className="flex flex-col items-center justify-center gap-1 p-4 border-[1px] border-white/10">
 			<p className="text-4xl">19+</p>
 
@@ -363,14 +363,14 @@ const Collab = () => (
 );
 
 const WorkProcess = () => (
-	<div className="p-4 border-[1px] border-white/10">
+	<div className="flex flex-col p-4 border-[1px] border-white/10">
 		<SectionHeader title="Work process" icon={SpinArrowsIcon} />
 
 		<p>The work process explained in 4 simple steps.</p>
 
 		<div className="w-full h-8" />
 
-		<div className="grid grid-rows-4 grid-cols-1 gap-2">
+		<div className="grow grid grid-rows-4 grid-cols-1 gap-2">
 			{(
 				[
 					[
@@ -411,7 +411,7 @@ const WorkProcess = () => (
 );
 
 export const Testimonials = () => (
-	<div className="p-4 border-[1px] border-white/10">
+	<div className="grow p-4 border-[1px] border-white/10">
 		<SectionHeader title="Testimonials" icon={StarHandIcon} />
 
 		<p>What my clients say about me.</p>
@@ -419,7 +419,19 @@ export const Testimonials = () => (
 		<div className="w-full h-8" />
 
 		<div className="relative">
-			<div className="before:absolute before:w-full before:h-full before:bg-gradient-to-t before:from-neutral-900 before:to-transparent">
+			<div className="flex flex-col gap-2 before:absolute before:w-full before:h-full before:bg-gradient-to-t before:from-neutral-900 before:to-transparent">
+				<Testimonial
+					name="Anom"
+					company="Delvfox"
+					rating={5}
+					description="Working with Mihai was a great experience. He is always on time and ready to help."
+				/>
+				<Testimonial
+					name="Anom"
+					company="Delvfox"
+					rating={5}
+					description="Working with Mihai was a great experience. He is always on time and ready to help."
+				/>
 				<Testimonial
 					name="Anom"
 					company="Delvfox"
@@ -427,12 +439,21 @@ export const Testimonials = () => (
 					description="Working with Mihai was a great experience. He is always on time and ready to help."
 				/>
 			</div>
+
+			<a
+				href="/testimonials"
+				className="absolute bottom-0 left-1/2 -translate-x-1/2 w-fit whitespace-nowrap flex gap-2 py-2 px-4 bg-purple-300 text-neutral-800 font-semibold"
+			>
+				<RatingStarIcon />
+
+				<p>View all testimonials</p>
+			</a>
 		</div>
 	</div>
 );
 
 const Footer = () => (
-	<div className="p-4 py-8 bg-neutral-900 text-neutral-200/50 text-center text-sm">
+	<div className="grow flex flex-col py-8 bg-neutral-900 text-neutral-200/50 text-center items-center justify-end text-sm">
 		<p>
 			Made with 💖 by{" "}
 			<a
@@ -452,26 +473,28 @@ const Footer = () => (
 function App() {
 	return (
 		<>
-			<div className="min-h-screen *:max-w-[900px] flex flex-col justify-center gap-4 p-4 bg-neutral-900 text-neutral-400 lg:flex-row lg:*:w-1/3">
-				<div className="flex flex-col gap-4">
-					<MainInfo />
-					<Services />
-					<NumbersGrid />
+			<div className="flex flex-col min-h-screen p-4 bg-neutral-900 text-neutral-400 ">
+				<div className="*:max-w-[1400px] grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+					<div className="flex flex-col gap-4">
+						<MainInfo />
+						<Services />
+						<NumbersGrid />
+					</div>
+
+					<div className="flex flex-col gap-4">
+						<Projects />
+						<TechStack />
+						<Collab />
+					</div>
+
+					<div className="w-full grid gap-4 grid-cols-1 md:col-span-2 md:grid-cols-2 lg:grid-cols-1 lg:col-span-1">
+						<WorkProcess />
+						<Testimonials />
+					</div>
 				</div>
 
-				<div className="flex flex-col gap-4">
-					<Projects />
-					<TechStack />
-					<Collab />
-				</div>
-
-				<div className="flex flex-col gap-4">
-					<WorkProcess />
-					<Testimonials />
-				</div>
+				<Footer />
 			</div>
-
-			<Footer />
 		</>
 	);
 }
