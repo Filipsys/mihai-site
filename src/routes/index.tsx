@@ -1,4 +1,4 @@
-import type { ComponentType } from "react";
+import { useEffect, useRef, type ComponentType, type RefObject } from "react";
 import {
   CalendarIcon,
   ClientsIcon,
@@ -304,7 +304,7 @@ const TechStack = () => (
       {(
         [
           ["Next.js", "https://nextjs.org", NextJSIcon],
-          ["TailwindCSS", "https://tailwindcss.com", TailwindCSSIcon],
+          ["Tailwind", "https://tailwindcss.com", TailwindCSSIcon],
           ["Shadcn/ui", "https://ui.shadcn.com", ShadcnUIIcon],
           ["Node.js", "https://nodejs.org", NodeJSIcon],
         ] as [string, string, ComponentType][]
@@ -367,8 +367,11 @@ const Collab = () => (
   </div>
 );
 
-const WorkProcess = () => (
-  <div className="h-fit flex flex-col p-4 border-[1px] border-white/10">
+const WorkProcess = (props: { ref: RefObject<HTMLDivElement | null> }) => (
+  <div
+    ref={props.ref}
+    className="h-fit flex flex-col p-4 border-[1px] border-white/10"
+  >
     <SectionHeader title="Work process" icon={SpinArrowsIcon} />
 
     <p>The work process explained in 4 simple steps.</p>
@@ -415,15 +418,20 @@ const WorkProcess = () => (
   </div>
 );
 
-export const Testimonials = () => (
-  <div className="grow p-4 border-[1px] border-white/10">
+export const Testimonials = (props: {
+  ref: RefObject<HTMLDivElement | null>;
+}) => (
+  <div
+    ref={props.ref}
+    className="grow flex flex-col overflow-hidden p-4 border-[1px] border-white/10"
+  >
     <SectionHeader title="Testimonials" icon={StarHandIcon} />
 
     <p>What my clients say about me.</p>
 
     <div className="w-full h-8" />
 
-    <div className="relative">
+    <div className="relative grow overflow-hidden">
       <div className="flex flex-col gap-2 before:absolute before:w-full before:h-full before:bg-gradient-to-t before:from-neutral-900 before:to-transparent">
         <Testimonial
           name="Anom"
@@ -470,10 +478,21 @@ const Footer = () => (
 );
 
 function App() {
+  const workRef = useRef<HTMLDivElement>(null);
+  const testimRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const workDiv = workRef.current;
+    const testimDiv = testimRef.current;
+    if (!workDiv || !testimDiv) return;
+
+    testimDiv.style.height = `${workDiv.offsetHeight}px`;
+  }, []);
+
   return (
     <>
-      <div className="flex flex-col min-h-screen p-4 bg-neutral-900 text-neutral-400 ">
-        <div className="*:max-w-[1400px] grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col min-h-screen p-4 bg-neutral-900 text-neutral-400">
+        <div className="grid gap-4 grid-cols-1 *:max-w-[1400px] md:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col gap-4">
             <MainInfo />
             <Services />
@@ -487,8 +506,8 @@ function App() {
           </div>
 
           <div className="w-full flex gap-4 flex-col col-span-1 md:col-span-2 md:flex-row md:*:w-full lg:flex-col lg:col-span-1">
-            <WorkProcess />
-            <Testimonials />
+            <WorkProcess ref={workRef} />
+            <Testimonials ref={testimRef} />
           </div>
         </div>
 
