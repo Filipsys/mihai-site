@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as TestimonialsIndexImport } from './routes/testimonials/index'
+import { Route as ProjectsIndexImport } from './routes/projects/index'
 
 // Create/Update Routes
 
@@ -28,6 +29,12 @@ const TestimonialsIndexRoute = TestimonialsIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProjectsIndexRoute = ProjectsIndexImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -37,6 +44,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsIndexImport
       parentRoute: typeof rootRoute
     }
     '/testimonials/': {
@@ -53,36 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/testimonials': typeof TestimonialsIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/projects': typeof ProjectsIndexRoute
   '/testimonials': typeof TestimonialsIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/projects/': typeof ProjectsIndexRoute
   '/testimonials/': typeof TestimonialsIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/testimonials'
+  fullPaths: '/' | '/projects' | '/testimonials'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/testimonials'
-  id: '__root__' | '/' | '/testimonials/'
+  to: '/' | '/projects' | '/testimonials'
+  id: '__root__' | '/' | '/projects/' | '/testimonials/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
   TestimonialsIndexRoute: typeof TestimonialsIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
   TestimonialsIndexRoute: TestimonialsIndexRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/projects/",
         "/testimonials/"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/projects/": {
+      "filePath": "projects/index.tsx"
     },
     "/testimonials/": {
       "filePath": "testimonials/index.tsx"

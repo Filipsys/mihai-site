@@ -29,6 +29,7 @@ import {
   WorkIcon,
 } from "@/icons/dev-icons";
 import { createFileRoute } from "@tanstack/react-router";
+import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -61,7 +62,7 @@ const TechCard = (props: {
   link: string;
   icon: ComponentType;
 }) => (
-  <div className="flex justify-between items-center p-2 pr-4 text-neutral-200 bg-neutral-950/25 border-[1px] border-white/5">
+  <div className="flex justify-between items-center p-2 pr-4 text-neutral-200 text-lg bg-neutral-950/25 border-[1px] border-white/5">
     <div className="flex gap-2 items-center">
       <div className="h-full p-2 bg-white/5 border-[1px] border-white/5 flex items-center justify-center aspect-square fill-purple-300 *:size-6">
         <props.icon />
@@ -131,19 +132,19 @@ export const ProcessCard = (props: {
   index: number;
   icon: ComponentType;
 }) => (
-  <div className="relative md:cursor-pointer p-4 h-full border-[1px] group border-white/5 bg-neutral-950/25 flex gap-4 *:first:text-purple-300 *:first:h-fit md:items-center md:py-2">
+  <div className="relative md:cursor-pointer p-4 h-full border-[1px] group border-white/5 bg-neutral-950/25 flex gap-4 *:first:text-purple-300 *:first:h-fit md:items-center md:py-2 lg:items-start lg:cursor-auto">
     <props.icon />
 
-    <div className="flex w-full h-full justify-between md:items-center">
+    <div className="flex w-full h-full justify-between md:items-center lg:items-start">
       <div className="flex flex-col">
-        <p className="text-neutral-200">{props.title}</p>
-        <p className="md:hidden">{props.description}</p>
+        <p className="text-neutral-200 text-lg">{props.title}</p>
+        <p className="md:hidden lg:block">{props.description}</p>
       </div>
 
-      <p className="italic text-neutral-200/25">#{props.index}</p>
+      <p className="italic text-base text-neutral-200/25">#{props.index}</p>
     </div>
 
-    <div className="hidden cursor-auto md:group-hover:block absolute bg-neutral-900 z-10 p-2 px-4 border-[1px] border-white/5 bottom-0 left-0 translate-y-full w-[calc(100%+2px)] -translate-x-[1px]">
+    <div className="hidden cursor-auto text-base md:group-hover:block lg:group-hover:hidden absolute bg-neutral-900 z-10 p-2 px-4 border-[1px] border-white/5 bottom-0 left-0 translate-y-full w-[calc(100%+2px)] -translate-x-[1px]">
       {/* I have to add the -1px translation to compensate for the 1px border */}
       <p>{props.description}</p>
     </div>
@@ -270,7 +271,7 @@ const Projects = () => (
     <div className="w-full h-8" />
 
     <div className="relative">
-      <div className="flex gap-2 *:h-24 overflow-hidden before:w-full before:h-full before:absolute before:bg-gradient-to-r before:from-neutral-900 before:via-transparent before:to-neutral-900">
+      <div className="flex gap-2 pb-8 overflow-hidden *:h-24 before:w-full before:h-full before:absolute before:bg-gradient-to-r before:from-neutral-900 before:via-transparent before:to-neutral-900">
         {[
           "catto.webp",
           "delvfox.webp",
@@ -288,6 +289,15 @@ const Projects = () => (
           />
         ))}
       </div>
+
+      <a
+        href="/projects"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-fit whitespace-nowrap flex gap-2 py-2 px-4 bg-neutral-800 border-[1px] border-neutral-700 font-semibold text-purple-300 *:first:size-5 items-center"
+      >
+        <WorkIcon />
+
+        <p>View all projects</p>
+      </a>
     </div>
   </div>
 );
@@ -449,31 +459,13 @@ export const Testimonials = (props: {
 
       <a
         href="/testimonials"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-fit whitespace-nowrap flex gap-2 py-2 px-4 bg-purple-300 text-neutral-800 font-semibold"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-fit whitespace-nowrap flex gap-2 py-2 px-4 bg-neutral-800 border-[1px] border-neutral-700 font-semibold text-purple-300 *:first:size-5 items-center"
       >
         <RatingStarIcon />
 
         <p>View all testimonials</p>
       </a>
     </div>
-  </div>
-);
-
-const Footer = () => (
-  <div className="grow flex flex-col py-8 bg-neutral-900 text-neutral-200/50 text-center items-center justify-end text-sm">
-    <p>
-      Made with 💖 by{" "}
-      <a
-        href="https://github.com/kkmihai"
-        target="_blank"
-        rel="noreferrer"
-        className="text-purple-300 text-shadow-[0_0_15px] text-shadow-purple-300 hover:underline"
-      >
-        kkMihai
-      </a>
-    </p>
-
-    <p>&copy; 2025 All rights reserved</p>
   </div>
 );
 
@@ -491,8 +483,8 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen p-4 bg-neutral-900 text-neutral-400">
-        <div className="grid gap-4 grid-cols-1 *:max-w-[1400px] md:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col min-h-screen items-center p-4 bg-neutral-900 text-neutral-400">
+        <div className="grid gap-4 grid-cols-1 max-w-[3300px] md:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col gap-4">
             <MainInfo />
             <Services />
