@@ -1,5 +1,5 @@
 export const Footer = () => (
-  <div className="flex grow py-8 flex-col bg-neutral-900 text-neutral-200/50 text-center items-center justify-end text-sm">
+  <div className="py-8 flex grow flex-col items-center justify-end bg-neutral-900 text-center text-neutral-200/50 text-sm">
     <p>
       Made with 💖 by{" "}
       <a
