@@ -23,7 +23,11 @@ export const MainInfo = () => (
       />
 
       <div>
-        <Badge title="Available to Work" />
+        <Badge
+          title="Available to Work"
+          textColor="text-green-600"
+          backgroundColor="bg-green-700/20"
+        />
 
         <p className="text-purple-300 text-3xl font-bold">Mihai</p>
         <p>

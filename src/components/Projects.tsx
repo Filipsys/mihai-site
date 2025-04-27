@@ -1,5 +1,6 @@
 import { WorkIcon } from "@/icons/dev-icons";
 import { SectionHeader } from "@/components/SectionHeader";
+import { PROJECT_FILE_NAMES } from "@/constants";
 
 export const Projects = () => (
   <div className="p-4 border-[1px] border-white/10">
@@ -11,13 +12,7 @@ export const Projects = () => (
 
     <div className="relative">
       <div className="flex gap-2 pb-8 overflow-hidden *:h-24 before:w-full before:h-full before:absolute before:bg-gradient-to-r before:from-neutral-900 before:via-transparent before:to-neutral-900">
-        {[
-          "catto.webp",
-          "delvfox.webp",
-          "mega-foxy.webp",
-          "nix-services.webp",
-          "shop.webp",
-        ].map((element, index) => (
+        {PROJECT_FILE_NAMES.map((element, index) => (
           <img
             src={`project-images/${element}`}
             key={`showcase-${element}-${

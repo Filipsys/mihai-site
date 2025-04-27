@@ -1,36 +1,77 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { FILTERS, PROJECTS, TAGS } from "@/constants";
+import { Badge } from "@/components/Badge";
 import { useState } from "react";
 import {
   ArrowIcon,
   FilterIcon,
   MiniCodeTagIcon,
-  ResetIcon,
+  RatingStarIcon,
   ResultIcon,
   SortIcon,
   TickIcon,
 } from "@/icons/dev-icons";
 
 import type { Dispatch, SetStateAction } from "react";
+import type { Project } from "@/types";
 
 export const Route = createFileRoute("/projects/")({
   component: RouteComponent,
 });
 
-const FILTERS = ["Featured", "Open source", "Demo available", "Show NSFW"];
+const ProjectCard = (props: { projectData: Project }) => (
+  <div className="flex flex-col border-[1px] border-neutral-700">
+    <div className="grow">
+      <img
+        src={props.projectData.imageURL}
+        alt={`${props.projectData.title} thumbnail`}
+        className="min-h-56 object-cover"
+      />
 
-const TAGS = [
-  "JavaScript",
-  "TypeScript",
-  "MySQL",
-  "Next.js",
-  "NextAuth.js",
-  "Node.js",
-  "Prisma",
-  "Redis",
-  "Sellix",
-  "ShadCN/UI",
-  "TailwindCSS",
-];
+      <div className="flex flex-col gap-4 p-4">
+        <div className="flex justify-between items-center">
+          <p className="text-neutral-300 text-xl font-semibold">
+            {props.projectData.title}
+          </p>
+
+          {props.projectData.featured ? (
+            <button
+              type="button"
+              className="flex items-center gap-1 px-2 py-1 bg-purple-300 text-neutral-800 *:first:size-5"
+            >
+              <RatingStarIcon />
+
+              <p>Featured</p>
+            </button>
+          ) : null}
+        </div>
+
+        <p>{props.projectData.description}</p>
+
+        <div className="flex flex-wrap gap-2">
+          {props.projectData.tags.map((tag) => (
+            <Badge title={tag} key={`${props.projectData.title}-${tag}`} />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div className="flex p-4 gap-2 *:grow *:w-1/2">
+      <button
+        type="button"
+        className="px-2 py-1 bg-purple-300 text-neutral-800"
+      >
+        <p>Live demo</p>
+      </button>
+      <button
+        type="button"
+        className="px-2 py-1 bg-neutral-700 text-neutral-300"
+      >
+        <p>Source</p>
+      </button>
+    </div>
+  </div>
+);
 
 const Filters = (props: {
   activeTags: string[];
@@ -39,7 +80,7 @@ const Filters = (props: {
   setActiveFilters: Dispatch<SetStateAction<string[]>>;
 }) => {
   return (
-    <div className="w-4/5 flex gap-2 *:w-1/4">
+    <div className="w-full p-2 flex gap-2 flex-col lg:w-4/5 md:flex-row *:md:w-1/4">
       <div>
         <div className="flex gap-1 items-center">
           <FilterIcon />
@@ -47,7 +88,7 @@ const Filters = (props: {
           <p className="text-neutral-200">Project type</p>
         </div>
 
-        <div className="flex flex-col">
+        <div className="grid grid-cols-2 grid-rows-2 text-nowrap md:grid-cols-1 md:grid-rows-4">
           {FILTERS.map((filter) => (
             <div className="flex gap-1" key={crypto.randomUUID()}>
               <div className="grid items-center justify-center p-1 *:[grid-area:1/1]">
@@ -83,6 +124,7 @@ const Filters = (props: {
           ))}
         </div>
       </div>
+
       <div>
         <div className="flex gap-1 items-center">
           <MiniCodeTagIcon />
@@ -90,7 +132,7 @@ const Filters = (props: {
           <p className="text-neutral-200">Technologies</p>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap flex-row gap-2">
           {TAGS.map((tag) => (
             <div
               className="px-1 py-0.5 bg-neutral-800 border-[1px] border-purple-300 cursor-pointer"
@@ -113,7 +155,7 @@ const Filters = (props: {
         <select
           name="sort"
           id="sort"
-          className="appearance-none w-full border-[1px] border-purple-300 px-2 py-1"
+          className="text-xs max-w-sm appearance-none w-full border-[1px] border-purple-300 px-2 py-1"
         >
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
@@ -121,6 +163,7 @@ const Filters = (props: {
           <option value="z-a">Z-A</option>
         </select>
       </div>
+
       <div>
         <div className="flex gap-1 items-center">
           <ResultIcon />
@@ -128,16 +171,12 @@ const Filters = (props: {
           <p className="text-neutral-200">Results</p>
         </div>
 
-        <button
-          type="button"
-          className="flex items-center gap-2 appearance-none border-[1px] *:stroke-neutral-300 border-purple-300 px-2 py-1"
-        >
-          <ResetIcon />
-
-          <p className="text-sm">Reset filters</p>
-        </button>
-
-        <p className="text-sm">Showing 7 of 7 projects.</p>
+        <p className="text-sm">
+          Showing 7 of 7 projects.{" "}
+          <button type="button" className="underline">
+            <p>Reset filters</p>
+          </button>
+        </p>
       </div>
     </div>
   );
@@ -173,6 +212,12 @@ function RouteComponent() {
         activeFilters={activeFilters}
         setActiveFilters={setActiveFilters}
       />
+
+      <div className="grid grid-row-1 gap-2 *:max-w-md md:grid-cols-2 lg:grid-cols-3">
+        {PROJECTS.map((project) => (
+          <ProjectCard projectData={project} key={`project-${project.title}`} />
+        ))}
+      </div>
     </div>
   );
 }
