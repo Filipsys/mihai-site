@@ -135,8 +135,20 @@ const Filters = (props: {
         <div className="flex flex-wrap flex-row gap-2">
           {TAGS.map((tag) => (
             <div
-              className="px-1 py-0.5 bg-neutral-800 border-[1px] border-purple-300 cursor-pointer"
-              onClick={() => null}
+              className={`px-1 py-0.5 border-[1px] border-purple-300 cursor-pointer ${props.activeTags.includes(tag) ? "bg-neutral-700" : "bg-neutral-800"}`}
+              onClick={(event) => {
+                const currentTag = event.currentTarget.textContent;
+                if (!currentTag) return;
+
+                if (props.activeTags.includes(currentTag)) {
+                  props.setActiveTags((previousTags) =>
+                    previousTags.filter((tag) => tag !== currentTag),
+                  );
+                  return;
+                }
+
+                props.setActiveTags([...props.activeTags, currentTag]);
+              }}
               onKeyUp={() => null}
               key={crypto.randomUUID()}
             >
@@ -214,9 +226,19 @@ function RouteComponent() {
       />
 
       <div className="grid grid-row-1 gap-2 *:max-w-md md:grid-cols-2 lg:grid-cols-3">
-        {PROJECTS.map((project) => (
-          <ProjectCard projectData={project} key={`project-${project.title}`} />
-        ))}
+        {PROJECTS.map((project) => {
+          if (
+            activeTags.length === 0 ||
+            project.tags.some((tag) => activeTags.includes(tag))
+          ) {
+            return (
+              <ProjectCard
+                projectData={project}
+                key={`project-${project.title}`}
+              />
+            );
+          }
+        })}
       </div>
     </div>
   );

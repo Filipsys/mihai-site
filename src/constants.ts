@@ -17,14 +17,14 @@ export const FILTERS = [
 
 export const TAGS = [
   "JavaScript",
-  "TypeScript",
+  // "TypeScript",
   "MySQL",
   "Next.js",
   "NextAuth.js",
   "Node.js",
   "Prisma",
-  "Redis",
-  "Sellix",
+  // "Redis",
+  // "Sellix",
   "ShadCN/UI",
   "TailwindCSS",
 ];
