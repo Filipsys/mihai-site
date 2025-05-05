@@ -14,7 +14,7 @@ import {
 import type { ComponentType } from "react";
 
 export const MainInfo = () => (
-  <div className="flex flex-col gap-4 p-4 border-[1px] border-white/10">
+  <div className="bg-primary flex flex-col gap-4 p-4 border-[1px] border-white/5">
     <div className="flex gap-4">
       <img
         src="cat-profile-picture.webp"
@@ -29,17 +29,15 @@ export const MainInfo = () => (
           backgroundColor="bg-green-700/20"
         />
 
-        <p className="text-purple-300 text-3xl font-bold">Mihai</p>
+        <p className="text-secondary text-3xl font-bold">Mihai</p>
         <p>
           I'm a{" "}
-          <span className="text-purple-300 font-bold">
-            full-stack developer
-          </span>
+          <span className="text-secondary font-bold">full-stack developer</span>
         </p>
       </div>
     </div>
 
-    <div className="flex gap-2 flex-wrap p-2 bg-neutral-950/25 border-[1px] border-white/5">
+    <div className="flex gap-2 flex-wrap p-2 bg-primary border-[1px] border-white/5">
       {/* Is this actually better than using
 			multiple <Tag /> elements? I thought it
 			would be better, look more compact and
@@ -71,7 +69,7 @@ export const MainInfo = () => (
         target="_blank"
         rel="noreferrer"
         type="button"
-        className="py-2 bg-blue-300 text-neutral-800"
+        className="py-2 bg-blue-300 text-primary transition-colors duration-200 hover:bg-blue-200"
       >
         <MailIcon />
 
@@ -83,7 +81,7 @@ export const MainInfo = () => (
         target="_blank"
         rel="noreferrer"
         type="button"
-        className="bg-white/10 text-neutral-200 fill-neutral-200"
+        className="bg-white/10 text-text-secondary fill-text-secondary transition-colors duration-200 hover:bg-white/20"
       >
         <GithubIcon />
 

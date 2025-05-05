@@ -1,12 +1,12 @@
 import type { Project } from "@/types";
 
 export const PROJECT_FILE_NAMES = [
-  "catto.webp",
-  "delvfox.webp",
-  "mega-foxy.webp",
-  "nix-services.webp",
-  "shop.webp",
-];
+  ["catto.webp", 0],
+  ["delvfox.webp", 1],
+  ["mega-foxy.webp", 2],
+  ["nix-services.webp", 3],
+  ["shop.webp", 4],
+] as [string, number][];
 
 export const FILTERS = [
   "Featured",
@@ -28,6 +28,42 @@ export const TAGS = [
   "ShadCN/UI",
   "TailwindCSS",
 ];
+
+export const SERVICES = [
+  ["Website Rework", 0],
+  ["Web Design", 1],
+  ["Hosting Guide", 2],
+  ["Web Security", 3],
+  ["Web Development", 4],
+  ["SEO Optimisation", 5],
+] as [string, number][];
+
+export const TESTIMONIALS = [
+  [
+    "Anom",
+    "Delvfox",
+    5,
+    "Working with Mihai was a great experience. He is always on time and ready to help.",
+  ],
+  [
+    "Emilio",
+    "Adultmex",
+    4,
+    "Mihai is the best! He completely revamped my website and converted it to Next.js, handling everything I asked for. He's super easy to work with, and even now, he still manages my VPS server. Definitely a 3/5, he really gets the job done...",
+  ],
+  [
+    "Anom",
+    "NixServices",
+    5,
+    "This dude is a beast. He is very good at what he is doing I would recommend him to anyone who needs a website.",
+  ],
+  [
+    "Anom",
+    "Catto.to",
+    1,
+    "Delivered better than expected. I am very happy with the result. My father left me and my grandma died because of him.",
+  ],
+] as [string, string, number, string][];
 
 export const PROJECTS: Project[] = [
   {

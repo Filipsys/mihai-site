@@ -1,8 +1,4 @@
-import { useEffect, useRef } from "react";
-import { scan } from "react-scan";
-import { createFileRoute } from "@tanstack/react-router";
 import { Footer } from "@/components/Footer";
-import { Testimonials } from "@/components/Testimonials";
 import { Services } from "@/components/Services";
 import { Projects } from "@/components/Projects";
 import { MainInfo } from "@/components/MainInfo";
@@ -10,6 +6,11 @@ import { Collab } from "@/components/Collab";
 import { NumbersGrid } from "@/components/NumbersGrid";
 import { TechStack } from "@/components/TechStack";
 import { WorkProcess } from "@/components/WorkProcess";
+import { Testimonials } from "@/components/Testimonials";
+
+import { scan } from "react-scan";
+import { useEffect, useRef } from "react";
+import { createFileRoute } from "@tanstack/react-router";
 
 // Check for prod version to disable react-scan
 if (typeof window !== "undefined" && !import.meta.env.PROD) scan();
@@ -32,8 +33,9 @@ function App() {
 
   return (
     <>
-      <div className="flex flex-col min-h-screen items-center p-4 bg-neutral-900 text-neutral-400">
-        <div className="grid gap-4 grid-cols-1 max-w-[3300px] md:grid-cols-2 lg:grid-cols-3">
+      {/* Add the **:rounded-lg class to check the rounded option */}
+      <div className="flex flex-col min-h-screen items-center p-4 bg-background text-text-primary">
+        <div className="grid gap-4 grid-cols-1 max-w-[2300px] md:grid-cols-2 lg:grid-cols-3">
           <div className="flex flex-col gap-4">
             <MainInfo />
             <Services />

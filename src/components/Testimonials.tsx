@@ -3,6 +3,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { StarRating } from "@/components/StarRating";
 
 import type { RefObject } from "react";
+import { TESTIMONIALS } from "@/constants";
 
 const Testimonial = (props: {
   name: string;
@@ -10,10 +11,10 @@ const Testimonial = (props: {
   rating: number;
   description: string;
 }) => (
-  <div className="p-4 bg-neutral-950/25 border-[1px] border-white/5">
-    <div className="flex justify-between ">
+  <div className="bg-background p-4 border-[1px] border-white/5">
+    <div className="flex justify-between">
       <div className="mb-4">
-        <p className="text-neutral-200 font-bold">{props.name}</p>
+        <p className="text-text-secondary font-bold">{props.name}</p>
         <p>{props.company}</p>
       </div>
 
@@ -31,7 +32,7 @@ export const Testimonials = (props: {
 }) => (
   <div
     ref={props.ref}
-    className="grow flex flex-col overflow-hidden p-4 border-[1px] border-white/10"
+    className="bg-primary grow flex flex-col overflow-hidden p-4 border-[1px] border-white/5"
   >
     <SectionHeader title="Testimonials" icon={StarHandIcon} />
 
@@ -40,24 +41,24 @@ export const Testimonials = (props: {
     <div className="w-full h-8" />
 
     <div className="relative grow overflow-hidden">
-      <div className="flex flex-col gap-2 before:absolute before:w-full before:h-full before:bg-gradient-to-t before:from-neutral-900 before:to-transparent">
+      <div className="flex flex-col gap-2 before:absolute before:w-full before:h-full before:bg-gradient-to-t before:from-primary before:to-transparent">
         <Testimonial
-          name="Anom"
-          company="Delvfox"
-          rating={5}
-          description="Working with Mihai was a great experience. He is always on time and ready to help."
+          name={TESTIMONIALS[0][0]}
+          company={TESTIMONIALS[0][1]}
+          rating={TESTIMONIALS[0][2]}
+          description={TESTIMONIALS[0][3]}
         />
         <Testimonial
-          name="Anom"
-          company="Delvfox"
-          rating={5}
-          description="Working with Mihai was a great experience. He is always on time and ready to help."
+          name={TESTIMONIALS[1][0]}
+          company={TESTIMONIALS[1][1]}
+          rating={TESTIMONIALS[1][2]}
+          description={TESTIMONIALS[1][3]}
         />
       </div>
 
       <a
         href="/testimonials"
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-fit whitespace-nowrap flex gap-2 py-2 px-4 bg-neutral-800 border-[1px] border-neutral-700 font-semibold text-purple-300 *:first:size-5 items-center"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-fit whitespace-nowrap flex gap-2 py-2 px-4 bg-primary border-[1px] border-white/5 font-semibold text-secondary *:first:size-5 items-center"
       >
         <RatingStarIcon />
 

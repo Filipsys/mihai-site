@@ -20,7 +20,7 @@ export const Route = createFileRoute("/projects/")({
 });
 
 const ProjectCard = (props: { projectData: Project }) => (
-  <div className="flex flex-col border-[1px] border-neutral-700">
+  <div className="flex flex-col border-[1px] border-white/5">
     <div className="grow">
       <img
         src={props.projectData.imageURL}
@@ -30,14 +30,14 @@ const ProjectCard = (props: { projectData: Project }) => (
 
       <div className="flex flex-col gap-4 p-4">
         <div className="flex justify-between items-center">
-          <p className="text-neutral-300 text-xl font-semibold">
+          <p className="text-text-primary text-xl font-semibold">
             {props.projectData.title}
           </p>
 
           {props.projectData.featured ? (
             <button
               type="button"
-              className="flex items-center gap-1 px-2 py-1 bg-purple-300 text-neutral-800 *:first:size-5"
+              className="flex items-center gap-1 px-2 py-1 bg-primary text-neutral-800 *:first:size-5"
             >
               <RatingStarIcon />
 
@@ -57,10 +57,7 @@ const ProjectCard = (props: { projectData: Project }) => (
     </div>
 
     <div className="flex p-4 gap-2 *:grow *:w-1/2">
-      <button
-        type="button"
-        className="px-2 py-1 bg-purple-300 text-neutral-800"
-      >
+      <button type="button" className="px-2 py-1 bg-primary text-neutral-800">
         <p>Live demo</p>
       </button>
       <button
@@ -95,7 +92,7 @@ const Filters = (props: {
                 <input
                   type="checkbox"
                   name={filter.toLowerCase()}
-                  className="peer appearance-none size-3 bg-neutral-800 border-[1px] border-purple-300 cursor-pointer checked:bg-purple-300"
+                  className="peer appearance-none size-3 bg-neutral-800 border-[1px] border-bg-primary cursor-pointer checked:bg-primary"
                   onChange={(event) => {
                     if (event.currentTarget.checked) {
                       props.setActiveFilters([
@@ -135,7 +132,7 @@ const Filters = (props: {
         <div className="flex flex-wrap flex-row gap-2">
           {TAGS.map((tag) => (
             <div
-              className={`px-1 py-0.5 border-[1px] border-purple-300 cursor-pointer ${props.activeTags.includes(tag) ? "bg-neutral-700" : "bg-neutral-800"}`}
+              className={`px-1 py-0.5 border-[1px] border-bg-primary cursor-pointer ${props.activeTags.includes(tag) ? "bg-neutral-700" : "bg-neutral-800"}`}
               onClick={(event) => {
                 const currentTag = event.currentTarget.textContent;
                 if (!currentTag) return;
@@ -167,7 +164,7 @@ const Filters = (props: {
         <select
           name="sort"
           id="sort"
-          className="text-xs max-w-sm appearance-none w-full border-[1px] border-purple-300 px-2 py-1"
+          className="text-xs max-w-sm appearance-none w-full border-[1px] border-bg-primary px-2 py-1"
         >
           <option value="newest">Newest</option>
           <option value="oldest">Oldest</option>
@@ -210,7 +207,7 @@ function RouteComponent() {
 
         <a
           href="/"
-          className="w-fit flex items-center gap-2 py-2 my-4 px-4 bg-purple-300 text-neutral-800 font-semibold"
+          className="w-fit flex items-center gap-2 py-2 my-4 px-4 bg-primary text-neutral-800 font-semibold"
         >
           <ArrowIcon />
 

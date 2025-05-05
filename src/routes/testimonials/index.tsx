@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { StarRating } from "@/components/StarRating";
 import { ArrowIcon } from "@/icons/dev-icons";
+import { TESTIMONIALS } from "@/constants";
 
 export const Route = createFileRoute("/testimonials/")({
   component: RouteComponent,
@@ -39,7 +40,7 @@ function RouteComponent() {
 
             <a
               href="/"
-              className="w-fit flex items-center gap-2 py-2 my-4 px-4 bg-purple-300 text-neutral-800 font-semibold"
+              className="w-fit flex items-center gap-2 py-2 my-4 px-4 bg-primary text-neutral-800 font-semibold"
             >
               <ArrowIcon />
 
@@ -49,7 +50,7 @@ function RouteComponent() {
 
           <div className="pointer-events-none blur-3xl [grid-area:1/1] h-44 overflow-hidden opacity-80">
             <div
-              className="h-[15rem] rotate-45 bg-gradient-to-tr from-purple-300 to-purple-500 "
+              className="h-[15rem] rotate-45 bg-gradient-to-tr from-bg-primary to-purple-500 "
               style={{
                 clipPath:
                   "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
@@ -60,34 +61,7 @@ function RouteComponent() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-2">
-        {(
-          [
-            [
-              "Anom",
-              "Delvfox",
-              5,
-              "Working with Mihai was a great experience. He is always on time and ready to help.",
-            ],
-            [
-              "Emilio",
-              "Adultmex",
-              4,
-              "Mihai is the best! He completely revamped my website and converted it to Next.js, handling everything I asked for. He's super easy to work with, and even now, he still manages my VPS server. Definitely a 3/5, he really gets the job done...",
-            ],
-            [
-              "Anom",
-              "NixServices",
-              5,
-              "This dude is a beast. He is very good at what he is doing I would recommend him to anyone who needs a website.",
-            ],
-            [
-              "Anom",
-              "Catto.to",
-              1,
-              "Delivered better than expected. I am very happy with the result. My father left me and my grandma died because of him.",
-            ],
-          ] as [string, string, number, string][]
-        ).map(([name, company, rating, description]) => (
+        {TESTIMONIALS.map(([name, company, rating, description]) => (
           <Testimonial
             name={name}
             company={company}

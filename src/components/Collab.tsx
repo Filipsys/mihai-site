@@ -6,28 +6,31 @@ import {
 } from "@/icons/dev-icons";
 
 export const Collab = () => (
-  <div className="h-full flex flex-col gap-4 items-center justify-center p-4 border-[1px] border-white/10">
-    <div className="p-4 bg-neutral-950/25 text-purple-300 border-[1px] border-white/10">
+  <div className="bg-primary h-full flex flex-col text-center gap-4 items-center justify-center p-4 border-[1px] border-white/5">
+    <div className="p-4 bg-primary text-secondary border-[1px] border-white/5">
       <WorkClientsIcon />
     </div>
 
-    <div className="text-center">
-      <p className="text-2xl font-bold text-neutral-200">
+    <div>
+      <p className="text-2xl font-bold text-text-secondary">
         Let&apos;s work together
       </p>
       <p className="font-semibold">and make your ideas come to life.</p>
     </div>
 
-    <div className="flex gap-2 *:flex *:items-center *:px-4 *:py-2 *:bg-neutral-950/25 *:fill-neutral-200 *:text-neutral-200 *:border-[1px] *:border-white/10">
-      <div className="hover:bg-neutral-800/25">
+    <div className="flex gap-2 *:cursor-pointer *:transition-colors *:duration-200 *:flex *:items-center *:px-4 *:py-2 *:bg-primary *:fill-text-secondary *:text-text-secondary *:border-[1px] *:border-white/5">
+      <button type="button" className="hover:bg-primary-hover">
         <MailIcon />
-      </div>
-      <div className="hover:bg-neutral-800/25">
+      </button>
+      <button type="button" className="hover:bg-primary-hover">
         <PaperPlaneIcon />
-      </div>
-      <div className="hover:bg-neutral-800/25 fill-neutral-200 *:size-6">
+      </button>
+      <button
+        type="button"
+        className="hover:bg-primary-hover fill-text-secondary *:size-6"
+      >
         <GithubIcon />
-      </div>
+      </button>
     </div>
   </div>
 );

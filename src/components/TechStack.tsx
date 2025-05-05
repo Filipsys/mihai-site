@@ -15,9 +15,9 @@ const TechCard = (props: {
   link: string;
   icon: ComponentType;
 }) => (
-  <div className="flex justify-between items-center p-2 pr-4 text-neutral-200 text-lg bg-neutral-950/25 border-[1px] border-white/5">
+  <div className="flex justify-between items-center p-2 pr-4 text-text-secondary text-lg bg-background border-[1px] border-white/5">
     <div className="flex gap-2 items-center">
-      <div className="h-full p-2 bg-white/5 border-[1px] border-white/5 flex items-center justify-center aspect-square fill-purple-300 *:size-6">
+      <div className="h-full p-2 bg-white/5 border-[1px] border-white/5 flex items-center justify-center aspect-square fill-secondary *:size-6">
         <props.icon />
       </div>
 
@@ -28,7 +28,7 @@ const TechCard = (props: {
       href={props.link}
       target="_blank"
       rel="noreferrer"
-      className="*:text-purple-300"
+      className="*:text-text-secondary"
     >
       <LinkArrow />
     </a>
@@ -36,7 +36,7 @@ const TechCard = (props: {
 );
 
 export const TechStack = () => (
-  <div className="p-4 border-[1px] border-white/10">
+  <div className="bg-primary p-4 border-[1px] border-white/5">
     <SectionHeader title="My tech stack" icon={StackIcon} />
 
     <p>My favourite tech stack I use on my projects.</p>
