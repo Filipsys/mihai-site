@@ -13,7 +13,7 @@ import { useEffect, useRef } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 // Check for prod version to disable react-scan
-if (typeof window !== "undefined" && !import.meta.env.PROD) scan();
+if (typeof window !== "undefined" && import.meta.env.DEV) scan();
 
 export const Route = createFileRoute("/")({
   component: App,

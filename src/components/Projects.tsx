@@ -10,10 +10,10 @@ const Carousel = (props: { direction: "left" | "right" }) => (
       {(props.direction === "left"
         ? [...PROJECT_FILE_NAMES, ...PROJECT_FILE_NAMES]
         : [...PROJECT_FILE_NAMES, ...PROJECT_FILE_NAMES].reverse()
-      ).map((element) => (
+      ).map((element, index) => (
         <img
           src={`project-images/${element[0]}`}
-          key={`showcase-${element[1]}`}
+          key={`showcase-${index}-${element[1]}`}
           alt={element[0]}
         />
       ))}

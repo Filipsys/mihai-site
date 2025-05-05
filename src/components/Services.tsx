@@ -16,8 +16,11 @@ const Carousel = (props: { direction: "left" | "right" }) => (
       {(props.direction === "left"
         ? [...SERVICES, ...SERVICES]
         : [...SERVICES, ...SERVICES].reverse()
-      ).map((item) => (
-        <Item title={item[0]} key={`${item[1]}`} />
+      ).map((item, index) => (
+        <Item
+          title={item[0]}
+          key={`carousel-${props.direction}-${index}-${item[1]}`}
+        />
       ))}
     </div>
   </div>
